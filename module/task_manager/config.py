@@ -70,3 +70,4 @@ class TemplateTaskConfig(TemplateGeneralConfig):
 class TemplateInstanceConfig(BaseModel):
     idx: str  # 该实例的标识号 , 一般与实例名称相同
     cont: list[TemplateTaskConfig]
+    conf: list[TemplateGeneralConfig]

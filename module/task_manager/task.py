@@ -1,9 +1,14 @@
 from datetime import datetime
+from typing import Self
 
 from .config import TemplateTaskConfig
 
 
 class TemplateTask:
+    """
+    默认以下次执行时间为 key 比较大小
+    """
+
     def __init__(self, config: TemplateTaskConfig) -> None:
         self.config = config
 
@@ -15,6 +20,9 @@ class TemplateTask:
             NotImplementedError: _description_
         """
         raise NotImplementedError
+
+    def __lt__(self, o: Self):
+        return self.config.nxt < o.config.nxt
 
 
 if __name__ == "__main__":
