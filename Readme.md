@@ -1,0 +1,2 @@
+- [nonebot2](https://nonebot.dev/)
+- [Alas](https://github.com/LmeSzinc/AzurLaneAutoScript)

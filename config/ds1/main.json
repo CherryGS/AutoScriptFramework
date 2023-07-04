@@ -1,0 +1,51 @@
+{
+    "id": "ds1",
+    "configs": [
+        {
+            "title": "Test title",
+            "disable": true,
+            "cont": [
+                {
+                    "type": "choice",
+                    "text": "Test Choice",
+                    "args": [
+                        "choice1",
+                        "choice2",
+                        "choice3"
+                    ],
+                    "key": [
+                        1
+                    ],
+                    "Description": [
+                        "line1",
+                        "line2"
+                    ]
+                },
+                {
+                    "text": "Test Text",
+                    "type": "inline_text",
+                    "mutable": false,
+                    "key": [
+                        "1"
+                    ]
+                },
+                {
+                    "text": "Test Text",
+                    "type": "block_text",
+                    "key": [
+                        "1",
+                        "@2",
+                        "##3"
+                    ]
+                },
+                {
+                    "text": "Test checkbox",
+                    "type": "check",
+                    "key": [
+                        true
+                    ]
+                }
+            ]
+        }
+    ]
+}
