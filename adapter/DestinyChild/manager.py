@@ -1,6 +1,6 @@
-from module.task_manager.manager import TemplateTaskManager
-from module.priority_queue import PriorityQueue
-from module.ftime import now
+from module.manager import TemplateTaskManager
+from utility.priority_queue import PriorityQueue
+from utility.ftime import now
 
 from .config import DestinyChildConfig
 from .task import DestinyChildTask

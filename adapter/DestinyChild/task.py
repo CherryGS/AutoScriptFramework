@@ -1,6 +1,6 @@
-from module.task_manager import TemplateTask
+from module.task import BaseTask
 
 
-class DestinyChildTask(TemplateTask):
+class DestinyChildTask(BaseTask):
     def run(self):
         pass

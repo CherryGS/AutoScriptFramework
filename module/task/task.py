@@ -4,7 +4,7 @@ from typing import Self
 from .config import TemplateTaskConfig
 
 
-class TemplateTask:
+class BaseTask:
     """
     默认以下次执行时间为 key 比较大小
     """

@@ -1,4 +1,4 @@
-from module.task_manager import TemplateInstanceConfig
+from module.manager import TemplateInstanceConfig
 
 
 class DestinyChildConfig(TemplateInstanceConfig):
