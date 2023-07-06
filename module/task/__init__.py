@@ -1,2 +1,2 @@
 from .task import BaseTask
-from .config import TemplateTaskConfig, TemplateGeneralConfig
+from .config import TaskConfig, GeneralConfig
