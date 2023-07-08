@@ -1,0 +1,41 @@
+{
+    "content": [
+        {
+            "type": "0",
+            "scope": "0",
+            "name": "check",
+            "mutable": true,
+            "value": false,
+            "description": [
+                "It's a choice.",
+                "It's a line"
+            ]
+        },
+        {
+            "type": "1",
+            "name": "text",
+            "scope": "0",
+            "mutable": false,
+            "value": "It's value.",
+            "description": [
+                "It's a inline text."
+            ]
+        },
+        {
+            "type": "2",
+            "name": "choice",
+            "scope": "0",
+            "mutable": true,
+            "value": [
+                1
+            ],
+            "args": [
+                "c1",
+                "c2"
+            ],
+            "description": [
+                "It's a inline text."
+            ]
+        }
+    ]
+}

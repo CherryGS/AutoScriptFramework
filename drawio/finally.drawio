@@ -1,0 +1,226 @@
+<mxfile host="Electron" modified="2023-07-08T03:34:19.919Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.1 Chrome/112.0.5615.204 Electron/24.6.0 Safari/537.36" etag="abQaiI_k9GYyvM9vpVmz" version="21.5.1" type="device">
+  <diagram name="第 1 页" id="P8K3t6TnXgJzljz4Uw5Y">
+    <mxGraphModel dx="2487" dy="1040" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cutzJB-68W8znu99cxJw-3" value="FrontEnd/CLI/Client" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="120" y="80" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-13" value="Fastapi" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="120" y="240" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-16" value="Manager" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="120" y="400" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-24" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="120" y="520" width="320" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-21" value="" style="swimlane;startSize=0;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;html=1;container=0;fillStyle=auto;" parent="1" vertex="1">
+          <mxGeometry x="120" y="560" width="800" height="320" as="geometry">
+            <mxRectangle width="50" height="40" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-22" value="Multiprocessing Adapters" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontFamily=LXGW WenKai;fontColor=default;container=0;" parent="cutzJB-68W8znu99cxJw-21" vertex="1">
+          <mxGeometry x="260" y="10" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-63" value="worker_n" style="swimlane;whiteSpace=wrap;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-21" vertex="1">
+          <mxGeometry x="640" y="50" width="140" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-64" value="threadpool" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-63" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-65" value="config" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-63" vertex="1">
+          <mxGeometry x="10" y="70" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-66" value="tasks" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-63" vertex="1">
+          <mxGeometry x="10" y="117" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-67" value="scheduler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-63" vertex="1">
+          <mxGeometry x="10" y="160" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-68" value="IPC handler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-63" vertex="1">
+          <mxGeometry x="10" y="200" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-82" value="worker_2" style="swimlane;whiteSpace=wrap;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-21" vertex="1">
+          <mxGeometry x="180" y="50" width="140" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-83" value="threadpool" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-82" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-84" value="config" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-82" vertex="1">
+          <mxGeometry x="10" y="70" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-85" value="tasks" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-82" vertex="1">
+          <mxGeometry x="10" y="117" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-86" value="scheduler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-82" vertex="1">
+          <mxGeometry x="10" y="160" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-87" value="IPC handler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-82" vertex="1">
+          <mxGeometry x="10" y="200" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-88" value="worker_3" style="swimlane;whiteSpace=wrap;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-21" vertex="1">
+          <mxGeometry x="340" y="50" width="140" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-89" value="threadpool" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-88" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-90" value="config" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-88" vertex="1">
+          <mxGeometry x="10" y="70" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-91" value="tasks" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-88" vertex="1">
+          <mxGeometry x="10" y="117" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-92" value="scheduler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-88" vertex="1">
+          <mxGeometry x="10" y="160" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-93" value="IPC handler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-88" vertex="1">
+          <mxGeometry x="10" y="200" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-69" value="...." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-21" vertex="1">
+          <mxGeometry x="530" y="140" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-30" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-21" target="cutzJB-68W8znu99cxJw-16" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="470" y="570" as="sourcePoint" />
+            <mxPoint x="570" y="470" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-31" value="IPC" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-30" vertex="1" connectable="0">
+          <mxGeometry x="-0.0167" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-44" value="worker_1" style="swimlane;whiteSpace=wrap;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="140" y="610" width="140" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-47" value="threadpool" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-44" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-48" value="config" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-44" vertex="1">
+          <mxGeometry x="10" y="70" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-46" value="tasks" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-44" vertex="1">
+          <mxGeometry x="10" y="117" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-45" value="scheduler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-44" vertex="1">
+          <mxGeometry x="10" y="160" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-50" value="IPC handler" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-44" vertex="1">
+          <mxGeometry x="10" y="200" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-70" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-3" target="cutzJB-68W8znu99cxJw-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="340" y="210" as="sourcePoint" />
+            <mxPoint x="390" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-71" value="HTTP/WS" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-70" vertex="1" connectable="0">
+          <mxGeometry x="-0.0196" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-72" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-13" target="cutzJB-68W8znu99cxJw-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="760" y="210" as="sourcePoint" />
+            <mxPoint x="810" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-73" value="JSON/WS" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-72" vertex="1" connectable="0">
+          <mxGeometry x="0.0051" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-74" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-13" target="cutzJB-68W8znu99cxJw-16" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="220" as="sourcePoint" />
+            <mxPoint x="1080" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-75" value="HANDLER" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-74" vertex="1" connectable="0">
+          <mxGeometry x="-0.0196" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-77" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-16" target="cutzJB-68W8znu99cxJw-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="940" y="370" as="sourcePoint" />
+            <mxPoint x="990" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-78" value="OBJECT" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=LXGW WenKai;fontColor=default;" parent="cutzJB-68W8znu99cxJw-77" vertex="1" connectable="0">
+          <mxGeometry x="-0.0239" y="-2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-97" value="Emulator/DesktopApp/Browser" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="120" y="1200" width="800" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-98" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-97" target="cutzJB-68W8znu99cxJw-100" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="480" y="1140" as="sourcePoint" />
+            <mxPoint x="560" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-99" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;fontColor=default;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="cutzJB-68W8znu99cxJw-100" target="cutzJB-68W8znu99cxJw-21" edge="1">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="520" y="1000" as="sourcePoint" />
+            <mxPoint x="670" y="890" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-100" value="Driver" style="swimlane;whiteSpace=wrap;html=1;rounded=0;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="1" vertex="1">
+          <mxGeometry x="320" y="1000" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-101" value="adb shell" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-100" vertex="1">
+          <mxGeometry x="10" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-102" value="screenshot" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-100" vertex="1">
+          <mxGeometry x="140" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cutzJB-68W8znu99cxJw-103" value="touch" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" parent="cutzJB-68W8znu99cxJw-100" vertex="1">
+          <mxGeometry x="270" y="30" width="120" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--1" value="Driver" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=160;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=Architects Daughter;fontSource=https%3A%2F%2Ffonts.googleapis.com%2Fcss%3Ffamily%3DArchitects%2BDaughter;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="-650" y="80" width="650" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--2" value="Screenshot on Emulator" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSize=20;" vertex="1" parent="i38PXLECyoin7M_xozy--1">
+          <mxGeometry x="10" y="40" width="280" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--3" value="ADB" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--2">
+          <mxGeometry y="30" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--4" value="Ascreencap" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--2">
+          <mxGeometry y="60" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--5" value="DroidCast" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--2">
+          <mxGeometry y="90" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--6" value="uiAutomator" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--2">
+          <mxGeometry y="120" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--7" value="miniCap" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--2">
+          <mxGeometry y="150" width="280" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--8" value="Touch on Emulator" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;fontFamily=LXGW WenKai;fontSize=20;" vertex="1" parent="i38PXLECyoin7M_xozy--1">
+          <mxGeometry x="300" y="40" width="210" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--9" value="ADB" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--8">
+          <mxGeometry y="30" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--10" value="uiAutomator" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--8">
+          <mxGeometry y="60" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--11" value="minitouch" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--8">
+          <mxGeometry y="90" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--12" value="maatouch" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontSize=20;fontFamily=LXGW WenKai;" vertex="1" parent="i38PXLECyoin7M_xozy--8">
+          <mxGeometry y="120" width="210" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="i38PXLECyoin7M_xozy--13" value="ADB Shell" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;hachureGap=4;jiggle=2;curveFitting=1;strokeColor=default;fontFamily=LXGW WenKai;fontSize=20;fontColor=default;fillColor=default;" vertex="1" parent="i38PXLECyoin7M_xozy--1">
+          <mxGeometry x="520" y="40" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

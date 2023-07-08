@@ -1,1 +1,1 @@
-from .manager import *
+from .adapter import DestinyChildAdapter
