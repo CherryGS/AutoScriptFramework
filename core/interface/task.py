@@ -1,4 +1,5 @@
-from datetime import datetime
+from typing import Annotated
+from utility import redatetime, Annodate
 from enum import IntEnum
 
 from pydantic import BaseModel, field_validator, ConfigDict
@@ -74,12 +75,4 @@ class GeneralConfig(BaseModel):
 
 class TaskConfig(GeneralConfig):
     disable: bool = True  # 该任务是否启用
-    nxt: datetime  # 任务下次执行时间
-
-
-if __name__ == "__main__":
-    from rich import print
-    import json
-
-    r = TaskConfig.model_json_schema()
-    print(json.dumps(r))
+    nxt: Annodate  # 任务下次执行时间

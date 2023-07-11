@@ -12,8 +12,6 @@ class Scheduler:
         self.task_queue = PriorityQueue[BaseTask]()
         self.reload_task(tasks)
 
-        self.close = False
-
     def _assign_task(self, task: BaseTask):
         if task in self.task_hash:
             return
@@ -27,11 +25,10 @@ class Scheduler:
                 self.task_hash.add(task)
 
     def run(self):
-        while not self.close:
-            if self.task and self.task.finished:
-                self._assign_task(self.task)
-                self.task = None
-            if not self.task and not self.task_queue.empty():
-                self.task = self.task_queue.pop()
-            if self.task:
-                self.task.run()
+        if self.task and self.task.finished:
+            self._assign_task(self.task)
+            self.task = None
+        if not self.task and not self.task_queue.empty():
+            self.task = self.task_queue.pop()
+        if self.task:
+            self.task.run()

@@ -31,4 +31,13 @@ async def ws_worker_log(ws: WebSocket, worker_id: str):
 
 @my_router.get("/run/{instance_name}")
 def run_instance(instance_name: str):
+    # TODO : 阻塞监听成功信号
     manager.run_instance(instance_name)
+    return {"status": "OK"}
+
+
+@my_router.get("/close/{instance_name}")
+def close_instance(instance_name: str):
+    # TODO : 阻塞监听成功信号
+    manager.close_instance(instance_name)
+    return {"status": "OK"}

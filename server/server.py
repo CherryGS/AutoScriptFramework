@@ -1,7 +1,6 @@
 from contextlib import contextmanager
 from fastapi import FastAPI
-from manager import manager
-from .router import my_router
+from .router import my_router, test_router
 
 
 @contextmanager
@@ -11,3 +10,4 @@ def lifespan(app: FastAPI):
 
 app = FastAPI()
 app.include_router(my_router)
+app.include_router(test_router)

@@ -1,0 +1,328 @@
+{
+    "$defs": {
+        "BlockConfig": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "unique_id": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Unique Id"
+                },
+                "content": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/InlineSetting"
+                            },
+                            {
+                                "$ref": "#/$defs/BlockSetting"
+                            }
+                        ]
+                    },
+                    "title": "Content",
+                    "type": "array"
+                },
+                "description": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Description",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "name",
+                "unique_id",
+                "content"
+            ],
+            "title": "BlockConfig",
+            "type": "object"
+        },
+        "BlockSetting": {
+            "additionalProperties": false,
+            "properties": {
+                "scope": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/ScopeType"
+                        }
+                    ],
+                    "default": 1
+                },
+                "type": {
+                    "$ref": "#/$defs/SettingType"
+                },
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "mutable": {
+                    "default": true,
+                    "title": "Mutable",
+                    "type": "boolean"
+                },
+                "description": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Description",
+                    "type": "array"
+                },
+                "args": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Args",
+                    "type": "array"
+                },
+                "value": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "integer"
+                            },
+                            {
+                                "type": "boolean"
+                            }
+                        ]
+                    },
+                    "title": "Value",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "value"
+            ],
+            "title": "BlockSetting",
+            "type": "object"
+        },
+        "GeneralConfig": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "unique_id": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Unique Id"
+                },
+                "content": {
+                    "items": {
+                        "$ref": "#/$defs/BlockConfig"
+                    },
+                    "title": "Content",
+                    "type": "array"
+                },
+                "description": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Description",
+                    "type": "array"
+                }
+            },
+            "required": [
+                "name",
+                "unique_id",
+                "content"
+            ],
+            "title": "GeneralConfig",
+            "type": "object"
+        },
+        "InlineSetting": {
+            "additionalProperties": false,
+            "properties": {
+                "scope": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/ScopeType"
+                        }
+                    ],
+                    "default": 0
+                },
+                "type": {
+                    "$ref": "#/$defs/SettingType"
+                },
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "mutable": {
+                    "default": true,
+                    "title": "Mutable",
+                    "type": "boolean"
+                },
+                "description": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Description",
+                    "type": "array"
+                },
+                "args": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Args",
+                    "type": "array"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "boolean"
+                        }
+                    ],
+                    "title": "Value"
+                }
+            },
+            "required": [
+                "type",
+                "name",
+                "value"
+            ],
+            "title": "InlineSetting",
+            "type": "object"
+        },
+        "ScopeType": {
+            "enum": [
+                0,
+                1
+            ],
+            "title": "ScopeType",
+            "type": "integer"
+        },
+        "SettingType": {
+            "enum": [
+                0,
+                1,
+                2
+            ],
+            "title": "SettingType",
+            "type": "integer"
+        },
+        "TaskConfig": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "unique_id": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "integer"
+                        }
+                    ],
+                    "title": "Unique Id"
+                },
+                "content": {
+                    "items": {
+                        "$ref": "#/$defs/BlockConfig"
+                    },
+                    "title": "Content",
+                    "type": "array"
+                },
+                "description": {
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "title": "Description",
+                    "type": "array"
+                },
+                "disable": {
+                    "default": true,
+                    "title": "Disable",
+                    "type": "boolean"
+                },
+                "nxt": {
+                    "format": "date-time",
+                    "title": "Nxt",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "unique_id",
+                "content",
+                "nxt"
+            ],
+            "title": "TaskConfig",
+            "type": "object"
+        }
+    },
+    "properties": {
+        "name": {
+            "title": "Name",
+            "type": "string"
+        },
+        "unique_id": {
+            "anyOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ],
+            "title": "Unique Id"
+        },
+        "context": {
+            "items": {
+                "$ref": "#/$defs/TaskConfig"
+            },
+            "title": "Context",
+            "type": "array"
+        },
+        "config": {
+            "items": {
+                "$ref": "#/$defs/GeneralConfig"
+            },
+            "title": "Config",
+            "type": "array"
+        }
+    },
+    "required": [
+        "name",
+        "unique_id",
+        "context",
+        "config"
+    ],
+    "title": "InstanceConfig",
+    "type": "object"
+}

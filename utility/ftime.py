@@ -1,10 +1,11 @@
-from datetime import datetime as _datetime
+from datetime import datetime
+from typing import Annotated
 from tzlocal import get_localzone
 
 
-class datetime(_datetime):
+class redatetime(datetime):
     """
-    重写内置 datetime 使得默认采用 'T' 分隔和时区
+    重写内置 datetime 使其默认采用 'T' 分隔和时区
     以防 json schema 波浪线
     """
 
@@ -17,8 +18,14 @@ class datetime(_datetime):
     def now(cls):
         return super().now(cls.tz)
 
+    @classmethod
+    def day_str(cls):
+        return cls.strftime(cls.now(), "%Y-%m-%d")
+
+
+Annodate = Annotated[datetime, redatetime]
 
 if __name__ == "__main__":
     from rich import print
 
-    print(datetime.now())
+    print(redatetime.now())

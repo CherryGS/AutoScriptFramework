@@ -1,2 +1,1 @@
-from .adapter import *
-from .config import *
+from .adapter import Adapter

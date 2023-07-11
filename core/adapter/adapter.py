@@ -1,108 +1,173 @@
+import logging
 import time
+from datetime import datetime
 from multiprocessing import Pipe, Process, Queue
 from multiprocessing.connection import PipeConnection
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable, Self
 
-from core.task.task import BaseTask
+from rich import print
+from rich.console import Console
+
+from utility import redatetime
+from utility.logger import (
+    RichCallbackHandler,
+    RichFileHandler,
+    file_formatter,
+    getLogger,
+    initialize_logger,
+)
 from utility.priority_queue import PriorityQueue
 
 from ..executor import ThreadPoolExecutor
+from ..interface import *
 from ..scheduler import Scheduler
-from .channel import *
+
+logger = getLogger()
 
 
 class Adapter:
+    # TODO: 添加关闭时 log
+    # TODO: 添加异常与异常处理
     def __init__(
         self,
-        path: Path,
-        pipe: PipeConnection,
-        iq: Queue,
-        oq: Queue,
-        lq: Queue,
-        name: str = "Default Adapter",
+        instance_name: str,
+        instance_path: Path,
+        signal_pipe: PipeConnection,
+        input_queue: Queue,
+        output_queue: Queue,
+        renderable_queue: Queue,
+        need_response: bool = False,
+        adapter_name: str = "Default Adapter",
     ) -> None:
-        self.name = name
-        self.path = path
-        self.pipe = pipe
-        self.iq = iq
-        self.oq = oq
-        self.lq = lq
+        self.instance_name = instance_name
+        self.instance_path = instance_path
+        self.signal_pipe = signal_pipe
+        self.input_queue = input_queue  # 从外接受
+        self.output_queue = output_queue  # 向外输入
+        self.renderable_queue = renderable_queue  # 传输 rich 美化后的 log renderable
+        self.need_response = need_response  # 是否需要 response
+        self.adapter_name = adapter_name
+
+        self.unique_id = None  # 唯一id , 用来关联 instance
 
         self.heart_beat_interval = 0.2
         self.need_send_log = True
         self.close = False
 
-        self.signal = None
-        self.signal_queue = PriorityQueue[Signal]()
-        self.signal_handler: dict[str, Callable[[Self, Signal], Any]] = dict()
-
-        self.signal_handler[SignalType.close] = __close
-        self.signal_handler[SignalType.info] = __get_worker_info
-        self.signal_handler[SignalType.retask] = __reload_tasks
+        self.signal_queue_send = PriorityQueue[Signal]()
+        self.signal_queue_receive = PriorityQueue[Signal]()
+        self.signal_handler: dict[str, Callable[[Signal], Any]] = dict()
+        self.signal_handler[SignalType.need_close] = self._need_close
+        self.signal_handler[SignalType.heartbeat] = self._heartbeat
 
         self.sche = Scheduler()
-        self.sche.reload_task(self.get_task())
+
+    # signal tools
+
+    def _add_signal(self, s: Signal):
+        """
+        将待发送的的 Signal 按 `priority` 属性从大到小加入优先队列 , 留待后面发送
+        """
+        self.signal_queue_send.insert(s)
 
     def _listen_signal(self):
+        """
+        监听 Signal
+        """
         while not self.close:
-            if not self.signal:
-                recv = self.pipe.recv()
-                self.signal = Signal(**recv)
+            recv: Signal = self.signal_pipe.recv()
+            self.signal_queue_receive.insert(recv)
+            logger.debug(f"Receive signal {recv.type} created in {recv.create_time}")
 
-    def _response_signal(self):
-        o = self.signal
+    def _send_signal(self):
+        """
+        发送完所有 Signal 后才会退出
+        """
+
+        def _do(self: Self):
+            while not self.signal_queue_send.empty():
+                sig = self.signal_queue_send.pop()
+                self.signal_pipe.send(sig)
+                logger.debug(f"Send signal {sig.type} created in {sig.create_time}")
+
+        if not self.need_response:
+            return
         while not self.close:
-            if o:
-                self.signal_queue.insert(o)
-                resp = SignalResp(
-                    signal_type=o.type,
-                    status=True,
-                    key=o.key,
-                    body="Queued",
-                )
-                self.pipe.send(resp)
-                self.signal = None
-
-    def _send_log(self):
-        while not self.close and self.need_send_log:
-            log = ""
-            self.lq.put(log)
-
-    def _send_heart_beat(self):
-        while not self.close:
-            time.sleep(self.heart_beat_interval)
-            msg = HeartbeatMsg()
-            self.oq.put(msg)
+            _do(self)
+        _do(self)
 
     def _solve_signal(self):
+        """
+        处理完所有 Signal 后才会退出
+        """
+
+        def _do(self: Self):
+            while not self.signal_queue_receive.empty():
+                s = self.signal_queue_receive.pop()
+                if s.type in self.signal_handler:
+                    logger.debug(f"Solve signal {s.type} created in {s.create_time}")
+                    self.signal_handler[s.type](s)
+                    logger.debug(f"Finish signal {s.type} created in {s.create_time}")
+                else:
+                    logger.warning(f"Unknown signal : {s}")
+
         while not self.close:
-            while not self.signal_queue.empty():
-                s = self.signal_queue.pop()
-                self.signal_handler[s.type](self, s)
+            _do(self)
+        _do(self)
+
+    # task
+    def _tmp_task(self):
+        pass
+
+    # main
+
+    def _set_logger(self):
+        """
+        添加两个 handler : 加入队列和写入文件
+        这里尽量不要修改全局的级别
+        """
+        logger.handlers.clear()  # * 因为是多进程 , 且是入口没有多线程的情况 , 所以这里可以直接清除
+        # ! 为了防止队列阻塞引起死锁用 `put_nowait` , 个人实现时可以改成 `put` , 加上额外的逻辑
+        h1 = RichCallbackHandler(callback=self.renderable_queue.put_nowait)
+        # ! 这里要保证 `self.instance_path` 存在
+        h2 = RichFileHandler.quick(self.instance_path / f"{redatetime.day_str()}.log")
+        h2.setFormatter(file_formatter)
+        initialize_logger([h1, h2])
+
+    def _run(self):
+        while not self.close:
+            self.sche.run()
 
     def run(self):
+        """
+        adapter 的入口函数
+        """
+        self._set_logger()
+        logger.warning("Logger initialized.")
         with ThreadPoolExecutor() as exec:
             exec.submit(self._listen_signal)
-            exec.submit(self._response_signal)
-            exec.submit(self._send_log)
-            exec.submit(self._send_heart_beat)
-            exec.submit(self.sche.run)
+            exec.submit(self._send_signal)
+            exec.submit(self._solve_signal)
+            # exec.submit(self._run)
+        self.clear()
 
-    def get_task(self):
-        return []
+    def clear(self):
+        self.signal_pipe.close()
+        self.input_queue.close()
+        self.output_queue.close()
+        self.renderable_queue.close()
 
     def create_new_instance(self, name: str, folder: Path):
         pass
 
+    # handler
 
-def __reload_tasks(self: Adapter, s: Signal):
-    self.sche.reload_task(self.get_task())
+    def _need_close(self, s: Signal):
+        assert s.type == SignalType.need_close
+        self.close = True
 
-
-def __close(self: Adapter, s: Signal):
-    self.close = True
-
-
-def __get_worker_info(self: Adapter, s: Signal):
-    pass
+    def _heartbeat(self, s: Signal):
+        assert s.type == SignalType.heartbeat
+        response = Response(priority=s.priority, body=s)
+        self._add_signal(response)

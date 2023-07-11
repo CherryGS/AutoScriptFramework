@@ -2,61 +2,89 @@ from dataclasses import dataclass
 from multiprocessing import Pipe, Process, Queue
 from multiprocessing.connection import PipeConnection
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Type
 
+from global_config import basic_config
 from core.adapter import Adapter
-from core.adapter.channel import *
-
-from ..config import asf_cofig
+from core.interface import *
 
 
-@dataclass(eq=False, slots=True)
-class WorkerCollection:
-    process: Process
-    pipe: PipeConnection
-    inque: Queue
-    outque: Queue
-    logque: Queue
+class Worker:
+    def __init__(
+        self, Adapter: Type[Adapter], instance_name: str, instance_path: Path
+    ) -> None:
+        signal_pipe = Pipe()
+
+        # ipc & adapter
+        self.input_queue = Queue()
+        self.output_queue = Queue()
+        self.renderable_queue = Queue()  # 与 `rich` 耦合
+        self.ipc_args = (
+            signal_pipe[1],
+            self.input_queue,
+            self.output_queue,
+            self.renderable_queue,
+        )
+        self.adapter = Adapter(instance_name, instance_path, *self.ipc_args)
+        self.process = Process(target=self.adapter.run)
+
+        # self
+        self.signal_pipe = signal_pipe[0]
+        self._close: bool = False
+
+    # ipc tools
+
+    def _send_close(self):
+        self.signal_pipe.send(NeedClose())
+
+    # main
+
+    def start(self):
+        self.process.start()
+
+    def is_alive(self):
+        return self.process.is_alive()
+
+    def close(self, force: bool = False):
+        self._close = True
+        if force:
+            self.process.terminate()
+        else:
+            self._send_close()
+
+        self.clear()
+
+    def clear(self, timeout: int = 5):
+        self.process.join(timeout)
+        self.signal_pipe.close()
+        self.input_queue.close()
+        self.output_queue.close()
+        self.renderable_queue.close()
+        self.process.close()
+
+
+def fake_get_adapter_by_instance_name(instance_name: str) -> Type[Adapter]:
+    return Adapter
 
 
 class Manager:
     def __init__(self) -> None:
-        self.worker_collections: dict[str, WorkerCollection] = dict()
-        self.all_instance: dict[str, Any] = dict()
-
-    def _get_all_instance(self):
-        return {"NO": "NotImplement"}
-
-    def get_all_instance(self):
-        if not self.all_instance:
-            self.all_instance = self._get_all_instance()
-        return self.all_instance
+        self.workers: dict[str, Worker] = dict()
 
     def create_instance(self, instance_name: str, adapter: Adapter):
-        adapter.create_new_instance(instance_name, asf_cofig.instance_folder)
+        adapter.create_new_instance(instance_name, basic_config.instance_folder)
 
     def run_instance(self, instance_name: str):
-        # some code to get adapter worker
-        path = Path()
-        conns = Pipe()
-        inque = Queue()
-        outque = Queue()
-        logque = Queue()
+        fake_instance_path = Path(r"E:\CherryGS\Project\AutoScriptFramework\log")
+        fake_Adapter = fake_get_adapter_by_instance_name(instance_name)
+        worker = Worker(fake_Adapter, instance_name, fake_instance_path)
+        self.workers[instance_name] = worker
+        worker.start()
 
-        worker = Adapter(path=path, pipe=conns[1], iq=inque, oq=outque, lq=logque)
-        run_args = ()
-        run_kwargs = {}
-        process = Process(target=worker.run, args=run_args, kwargs=run_kwargs)
-
-        self.worker_collections[instance_name] = WorkerCollection(
-            process=process, pipe=conns[0], inque=inque, outque=outque, logque=logque
-        )
-        process.start()
-
-    def close_instance(self, instance_name: str):
-        p = self.worker_collections[instance_name]
-        p.inque.close()
-        p.outque.close()
+    def close_instance(self, instance_name: str, force: bool = False):
+        if instance_name not in self.workers:
+            raise ValueError()
+        self.workers[instance_name].close(force)
 
 
 manager = Manager()

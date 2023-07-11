@@ -1,6 +1,6 @@
-from datetime import datetime
+from utility import redatetime
 
-from .config import TaskConfig
+from core.interface import *
 from .step import BaseStep, BaseData
 
 
@@ -30,4 +30,4 @@ class BaseTask:
 
 
 if __name__ == "__main__":
-    now = datetime.today()
+    now = redatetime.today()
