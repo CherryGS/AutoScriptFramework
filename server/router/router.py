@@ -1,5 +1,5 @@
 from fastapi import APIRouter, WebSocket
-from manager import manager
+from core.manager import manager
 
 my_router = APIRouter()
 
@@ -31,7 +31,6 @@ async def ws_worker_log(ws: WebSocket, worker_id: str):
 
 @my_router.get("/run/{instance_name}")
 def run_instance(instance_name: str):
-    # TODO : 阻塞监听成功信号
     manager.run_instance(instance_name)
     return {"status": "OK"}
 
@@ -39,5 +38,5 @@ def run_instance(instance_name: str):
 @my_router.get("/close/{instance_name}")
 def close_instance(instance_name: str):
     # TODO : 阻塞监听成功信号
-    manager.close_instance(instance_name)
+    manager.close_instance(instance_name, timeout=3)
     return {"status": "OK"}

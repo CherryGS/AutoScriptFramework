@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 class Config(BaseModel):
     instance_folder: Path = Field(default=Path(os.getcwd()) / "config")
     main_log_path: Path = Field(default=Path(os.getcwd()) / "log")
+    debug: bool = True
 
 
 try:

@@ -10,6 +10,7 @@ from rich.console import Console, ConsoleRenderable
 from rich.highlighter import Highlighter
 from rich.logging import RichHandler
 from rich.traceback import LOCALS_MAX_LENGTH, LOCALS_MAX_STRING, Traceback
+from global_config import basic_config
 
 # from AzurlaneAutoScript , thx
 console_formatter = logging.Formatter(
@@ -275,8 +276,13 @@ def getLogger(name: str | None = None):
 
 
 def initialize_logger(handlers: list):
+    """
+    初始化根记录器
+    """
+    # * level 是根记录器的等级
+    level = logging.INFO if not basic_config.debug else logging.DEBUG
     # ! 启用了 `force=True` 会强制覆盖原有的配置
-    logging.basicConfig(level=logging.INFO, handlers=handlers, force=True)
+    logging.basicConfig(level=level, handlers=handlers, force=True)
     # * 使得 log 的 `emit` 中的 `handle` 可以抛出异常 , 这可能会打断程序
     logging.raiseExceptions = True
 

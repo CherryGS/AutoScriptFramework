@@ -15,6 +15,7 @@ from utility.logger import (
     RichFileHandler,
     file_formatter,
     getLogger,
+    hook_exception,
     initialize_logger,
 )
 from utility.priority_queue import PriorityQueue
@@ -77,8 +78,11 @@ class Adapter:
         """
         while not self.close:
             recv: Signal = self.signal_pipe.recv()
+            if recv is None:  # 收到 None 关闭
+                break
             self.signal_queue_receive.insert(recv)
-            logger.debug(f"Receive signal {recv.type} created in {recv.create_time}")
+            logger.debug(f"Receive signal '{recv.type}' created in {recv.create_time}")
+        logger.info("Signal listener exits.")
 
     def _send_signal(self):
         """
@@ -89,13 +93,13 @@ class Adapter:
             while not self.signal_queue_send.empty():
                 sig = self.signal_queue_send.pop()
                 self.signal_pipe.send(sig)
-                logger.debug(f"Send signal {sig.type} created in {sig.create_time}")
+                logger.debug(f"Send signal '{sig.type}' created in {sig.create_time}")
 
-        if not self.need_response:
-            return
-        while not self.close:
+        if self.need_response:
+            while not self.close:
+                _do(self)
             _do(self)
-        _do(self)
+        logger.info("Signal sender exits.")
 
     def _solve_signal(self):
         """
@@ -106,15 +110,16 @@ class Adapter:
             while not self.signal_queue_receive.empty():
                 s = self.signal_queue_receive.pop()
                 if s.type in self.signal_handler:
-                    logger.debug(f"Solve signal {s.type} created in {s.create_time}")
+                    logger.debug(f"Solve signal '{s.type}' created in {s.create_time}")
                     self.signal_handler[s.type](s)
-                    logger.debug(f"Finish signal {s.type} created in {s.create_time}")
+                    logger.debug(f"Finish signal '{s.type}' created in {s.create_time}")
                 else:
                     logger.warning(f"Unknown signal : {s}")
 
         while not self.close:
             _do(self)
         _do(self)
+        logger.info("Signal solver exits.")
 
     # task
     def _tmp_task(self):
@@ -128,12 +133,20 @@ class Adapter:
         这里尽量不要修改全局的级别
         """
         logger.handlers.clear()  # * 因为是多进程 , 且是入口没有多线程的情况 , 所以这里可以直接清除
-        # ! 为了防止队列阻塞引起死锁用 `put_nowait` , 个人实现时可以改成 `put` , 加上额外的逻辑
-        h1 = RichCallbackHandler(callback=self.renderable_queue.put_nowait)
+        h1 = RichCallbackHandler(callback=self.renderable_queue.put)
         # ! 这里要保证 `self.instance_path` 存在
-        h2 = RichFileHandler.quick(self.instance_path / f"{redatetime.day_str()}.log")
+        h2 = RichFileHandler.quick(
+            self.instance_path / f"{redatetime.day_str()}_{self.instance_name}.log"
+        )
         h2.setFormatter(file_formatter)
         initialize_logger([h1, h2])
+        hook_exception(callback=self.renderable_queue.put_nowait)
+
+        debug_logger = getLogger("core.adapter.debug")  # file only
+        debug_logger.setLevel("DEBUG")
+        debug_logger.propagate = False
+        debug_logger.addHandler(h2)
+        self.debug = debug_logger
 
     def _run(self):
         while not self.close:
@@ -144,19 +157,26 @@ class Adapter:
         adapter 的入口函数
         """
         self._set_logger()
-        logger.warning("Logger initialized.")
+        logger.info("Logger initialized.")
         with ThreadPoolExecutor() as exec:
             exec.submit(self._listen_signal)
             exec.submit(self._send_signal)
             exec.submit(self._solve_signal)
             # exec.submit(self._run)
+        logger.info("Process is closing.")
         self.clear()
 
     def clear(self):
-        self.signal_pipe.close()
-        self.input_queue.close()
-        self.output_queue.close()
-        self.renderable_queue.close()
+        # self.signal_pipe.close() 从主进程关闭即可
+        lis = [self.input_queue, self.output_queue, self.renderable_queue]
+        for i in lis:
+            # 清空队列 , 防止 `close` 可能的死锁
+            while not i.empty():
+                i.get_nowait()
+            i.close()
+            # i.cancel_join_thread()
+        for i in lis:
+            i.join_thread()
 
     def create_new_instance(self, name: str, folder: Path):
         pass

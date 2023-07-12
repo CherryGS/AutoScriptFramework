@@ -1,3 +1,4 @@
+import logging
 import os
 from pathlib import Path
 from typing import Any
@@ -38,19 +39,32 @@ if __name__ == "__main__":
     console_handler = RichRecordHandler()
     console_handler.setFormatter(console_formatter)
     initialize_logger([console_handler, file_handler])
+    getLogger().info(f"Program starts with log level {getLogger().getEffectiveLevel()}")
+
+    """ --- log level ---
+    CRITICAL 50
+    ERROR 40
+    WARNING 30
+    INFO 20
+    DEBUG 10
+    Trace 5 (uvicorn)
+    NOTSET 0
+    """
 
     # 配置并运行服务器
     # ? 好像 uvicorn 的 logrecord 不会传到 rootlogger
     # ? 但 `getLogger("uvicorn").propagate = True` , 其余的 `uvicorn.error` 等类似
     # * uvicorn 利用 config 在运行时修改 logger , 所以在修改前 `propagate = True`
     # * 简单的在设置中配置 `log_config=None` 来禁止 uvicorn 进行任何修改
-    server_config = uvicorn.Config(app, port=5000, log_level="info", log_config=None)
+    # * 同时不设置 `log_level` 使得所有的记录器从 `getLogger('uvicorn')` 获取等级
+    server_config = uvicorn.Config(app, port=5000, log_config=None)
     server = uvicorn.Server(server_config)
     uvicorn_file_handler = RichFileHandler.quick(
         log_path / f"{redatetime.day_str()}_uvicorn.log"
     )
     uvicorn_file_handler.setFormatter(file_formatter)
     uvicorn_logger = getLogger("uvicorn")
+    uvicorn_logger.setLevel(logging.INFO)
     uvicorn_logger.propagate = False
     uvicorn_logger.addHandler(uvicorn_file_handler)
     uvicorn_logger.addHandler(console_handler)
