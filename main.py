@@ -1,23 +1,21 @@
-import logging
 import os
 from pathlib import Path
-from typing import Any
 
-import rich.traceback
-import uvicorn
-
-import minimal_patch
 from utility.logger import RichRecordHandler
 
 # 设置工作目录为当前文件对应目录
 os.chdir(Path(__file__).parent)
+
+import logging
+
+import rich.traceback
+import uvicorn
 
 # 注册 rich 的 traceback 为默认
 rich.traceback.install(show_locals=True)
 
 if __name__ == "__main__":
     import uvicorn.server
-    from rich.logging import RichHandler
 
     from global_config import basic_config
     from server import app
@@ -32,13 +30,14 @@ if __name__ == "__main__":
 
     # 配置 rootLogger
     log_path = basic_config.main_log_path
+    level = logging.DEBUG if basic_config.debug else logging.INFO
     if not log_path.is_dir():
         os.makedirs(log_path)
     file_handler = RichFileHandler.quick(log_path / f"{redatetime.day_str()}_main.log")
     file_handler.setFormatter(file_formatter)
     console_handler = RichRecordHandler()
     console_handler.setFormatter(console_formatter)
-    initialize_logger([console_handler, file_handler])
+    initialize_logger([console_handler, file_handler], level)
     getLogger().info(f"Program starts with log level {getLogger().getEffectiveLevel()}")
 
     """ --- log level ---
@@ -64,7 +63,7 @@ if __name__ == "__main__":
     )
     uvicorn_file_handler.setFormatter(file_formatter)
     uvicorn_logger = getLogger("uvicorn")
-    uvicorn_logger.setLevel(logging.INFO)
+    uvicorn_logger.setLevel(level)
     uvicorn_logger.propagate = False
     uvicorn_logger.addHandler(uvicorn_file_handler)
     uvicorn_logger.addHandler(console_handler)

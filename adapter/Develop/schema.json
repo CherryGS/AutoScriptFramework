@@ -1,0 +1,32 @@
+{
+    "properties": {
+        "unique_id": {
+            "title": "Unique Id",
+            "type": "integer"
+        },
+        "name": {
+            "title": "Name",
+            "type": "string"
+        },
+        "task_pre_folder": {
+            "default": ".",
+            "format": "path",
+            "title": "Task Pre Folder",
+            "type": "string"
+        },
+        "task_files": {
+            "items": {
+                "type": "string"
+            },
+            "title": "Task Files",
+            "type": "array"
+        }
+    },
+    "required": [
+        "unique_id",
+        "name",
+        "task_files"
+    ],
+    "title": "AdapterConfig",
+    "type": "object"
+}

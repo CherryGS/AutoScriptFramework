@@ -1,0 +1,9 @@
+{
+    "$schema": "./schema.json",
+    "name": "Developer Adapter",
+    "unique_id": 114514,
+    "task_files": [
+        "task.json"
+    ],
+    "task_pre_folder": "."
+}

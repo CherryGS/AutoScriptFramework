@@ -1,3 +1,4 @@
+import json
 import time
 from dataclasses import dataclass
 from multiprocessing import Pipe, Process, Queue
@@ -90,8 +91,23 @@ def fake_get_adapter_by_instance_name(instance_name: str) -> Type[Adapter]:
 class Manager:
     def __init__(self) -> None:
         self.workers: dict[str, Worker] = dict()
+        self.instances: dict[str, InstanceConfig] = dict()
+        self.adapters: dict[int, tuple[AdapterConfig, Adapter]] = dict()
 
-    def create_instance(self, instance_name: str, adapter: Adapter):
+    def _load_adapter(self):
+        pass
+
+    def _load_instance(self):
+        instance_path = basic_config.instance_folder
+        for instance in instance_path.iterdir():
+            try:
+                with open(instance / "main.json", "r", encoding="utf8") as f:
+                    instance_config = InstanceConfig(**json.loads(f.read()))
+                self.instances
+            except Exception as e:
+                logger.exception(e)
+
+    def create_instance(self, instance_name: str, adapter: Adapter, adapter_id: int):
         adapter.create_new_instance(instance_name, basic_config.instance_folder)
 
     def run_instance(self, instance_name: str):
@@ -102,7 +118,7 @@ class Manager:
             self.workers[instance_name] = worker
             worker.start()
         except Exception as e:
-            ...
+            raise
 
     def close_instance(
         self, instance_name: str, force: bool = False, timeout: float | None = None
